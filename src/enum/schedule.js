@@ -1,0 +1,3 @@
+exports.jobNames = Object.freeze({
+  APPOINTMENT_NOTIFICATION: 'APPOINTMENT_NOTIFICATION',
+})
