@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: ${PROJECT_NAME}-server
+    build: .
+    image: ${PROJECT_NAME}
+    networks:
+      - common
+      - external
+
+
+networks:
+  common:
+    internal: true
+    name: ${PROJECT_NAME}
+  external:

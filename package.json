@@ -8,7 +8,10 @@
     "dev": "nodemon src/index.js",
     "lint": "eslint \"src/**/*.js\"",
     "lint:fix": "eslint \"src/**/*.js\" --fix",
-    "prettier": "prettier --check \"src/**/*.js\""
+    "prettier": "prettier --check \"src/**/*.js\"",
+    "docker:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml  up --build -d",
+    "docker:start": "docker compose -f docker-compose.yml -f docker-compose.start.yml up --build -d",
+    "docker:start:proxy": "docker compose -f docker-compose.yml -f docker-compose.start.yml -f docker-compose.proxy.yml up --build -d"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
