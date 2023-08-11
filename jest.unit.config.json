@@ -1,0 +1,6 @@
+{
+  "testEnvironment": "node",
+  "testMatch": [
+    "<rootDir>/src/**/*.unit.js"
+  ]
+}
