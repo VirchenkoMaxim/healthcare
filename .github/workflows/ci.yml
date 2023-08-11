@@ -28,12 +28,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy
-        uses: easingthemes/ssh-deploy@main
-        with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USER }}
-          SCRIPT_AFTER: |
-              cd healthcare && 
-              git pull && 
-              yarn docker:start:proxy
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_KEY  }}
+          HOST_NAME: ${{ secrets.HOST  }}
+          USER_NAME: ${{ secrets.USER  }}
+        if: ${{ needs.test.result == 'success' }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 
+          '
+           cd /home/ubuntu/healthcare && git pull && yarn docker:start:proxy
+          '
