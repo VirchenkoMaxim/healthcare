@@ -1,0 +1,7 @@
+{$SITE_ADDRESS}
+
+reverse_proxy /api/* {$PROJECT_NAME}-server:{$API_PORT}
+
+log {
+      format single_field common_log
+  }

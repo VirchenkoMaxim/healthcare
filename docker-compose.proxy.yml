@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+
+  caddy:
+    image: caddy:2.4.6
+    restart: always
+    container_name: ${PROJECT_NAME}-proxy
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      - SITE_ADDRESS=${SITE_ADDRESS}
+      - PROJECT_NAME=${PROJECT_NAME}
+      - API_PORT=${API_PORT}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - external
+      - common
+
+volumes:
+  caddy_data:
+  caddy_config:

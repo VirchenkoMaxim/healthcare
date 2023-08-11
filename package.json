@@ -8,15 +8,22 @@
     "dev": "nodemon src/index.js",
     "lint": "eslint \"src/**/*.js\"",
     "lint:fix": "eslint \"src/**/*.js\" --fix",
-    "prettier": "prettier --check \"src/**/*.js\""
+    "prettier": "prettier --check \"src/**/*.js\"",
+    "docker:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml  up --build -d",
+    "docker:start": "docker compose -f docker-compose.yml -f docker-compose.start.yml up --build -d",
+    "docker:start:proxy": "docker compose -f docker-compose.yml -f docker-compose.start.yml -f docker-compose.proxy.yml up --build -d",
+    "test:unit": "jest --config jest.unit.config.json",
+    "test": "yarn test:unit"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
+    "@types/jest": "^29.5.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^27.5.1",
     "nodemon": "^2.0.12",
     "prettier": "2.3.2"
   },
