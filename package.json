@@ -12,7 +12,8 @@
     "docker:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml  up --build -d",
     "docker:start": "docker compose -f docker-compose.yml -f docker-compose.start.yml up --build -d",
     "docker:start:proxy": "docker compose -f docker-compose.yml -f docker-compose.start.yml -f docker-compose.proxy.yml up --build -d",
-    "test:unit": "jest --config jest.unit.config.json"
+    "test:unit": "jest --config jest.unit.config.json",
+    "test": "yarn test:unit"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
