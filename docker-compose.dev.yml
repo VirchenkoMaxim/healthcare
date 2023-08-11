@@ -6,4 +6,4 @@ services:
       - ./src:/usr/src/app/src
     ports:
       - '${EXT_API_PORT}:${API_PORT}'
-    command: yarn dev -L
+    command: npm run dev -L
