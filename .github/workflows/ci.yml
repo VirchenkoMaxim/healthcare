@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, development ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, development ]
+    branches: [ main ]
 
 jobs:
   test:
@@ -20,3 +20,22 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm run test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_KEY  }}
+          HOSTNAME: ${{ secrets.HOST  }}
+          USER_NAME: ${{ secrets.USER  }}
+        if: ${{ needs.test.result == 'success' }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 
+          '
+           cd /home/ubuntu/healthcare && git pull && yarn docker:start:proxy
+          '
